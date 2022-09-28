@@ -64,12 +64,12 @@ public class PersonController implements ContractInterface {
 
 
     @Transaction
-    public Person createCat(final Context ctx, final String key , String name , Integer age , String gender , String phone) {
+    public Person createPerson(final Context ctx, final String key , String name , Integer age , String gender , String phone) {
 
         ChaincodeStub stub = ctx.getStub();
         String personState = stub.getStringState(key);
 
-        if (StringUtils.isEmpty(personState)) {
+        if (StringUtils.isNotEmpty(personState)) {
             String errorMessage = String.format("person %s already exists", key);
             System.out.println(errorMessage);
             throw new ChaincodeException(errorMessage);
@@ -90,7 +90,7 @@ public class PersonController implements ContractInterface {
         ChaincodeStub stub = ctx.getStub();
         String personState = stub.getStringState(key);
 
-        if (StringUtils.isEmpty(personState)) {
+        if (StringUtils.isNotEmpty(personState)) {
             String errorMessage = String.format("Person %s does not exist", key);
             System.out.println(errorMessage);
             throw new ChaincodeException(errorMessage);
