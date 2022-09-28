@@ -90,7 +90,7 @@ public class PersonController implements ContractInterface {
         ChaincodeStub stub = ctx.getStub();
         String personState = stub.getStringState(key);
 
-        if (StringUtils.isNotEmpty(personState)) {
+        if (StringUtils.isEmpty(personState)) {
             String errorMessage = String.format("Person %s does not exist", key);
             System.out.println(errorMessage);
             throw new ChaincodeException(errorMessage);
